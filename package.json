@@ -1,0 +1,30 @@
+{
+  "name": "catalogue",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Catalogue · Private Collection AI Vault",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "init": "npm run init -w @catalogue/server",
+    "dev": "concurrently -k -n server,web -c yellow,cyan \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "npm run dev -w @catalogue/server",
+    "dev:web": "npm run dev -w @catalogue/web",
+    "build": "npm run build -w @catalogue/shared && npm run build -w @catalogue/web && npm run build -w @catalogue/server",
+    "test": "npm test -w @catalogue/server",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "dev:lan": "concurrently -k -n server,web -c yellow,cyan \"npm:dev:server\" \"npm run dev -w @catalogue/web -- --host 0.0.0.0\""
+  },
+  "engines": {
+    "node": ">=22.9"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6",
+    "typescript": "~5.9.3"
+  },
+  "overrides": {
+    "typescript": "~5.9.3"
+  }
+}

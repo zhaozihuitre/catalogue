@@ -1,0 +1,31 @@
+# NAS（Linux 系统）/ 客户自有云 ECS 用的 systemd 服务。
+# 安装：
+#   sudo cp deploy/linux/catalogue.service /etc/systemd/system/
+#   sudo sed -i 's#__ROOT__#/opt/catalogue#g; s#__USER__#catalogue#g' /etc/systemd/system/catalogue.service
+#   sudo systemctl daemon-reload && sudo systemctl enable --now catalogue
+# OCR 服务照此再写一个 catalogue-ocr.service，ExecStart 换成 services/ocr/.venv/bin/python app.py 即可。
+[Unit]
+Description=Catalogue Private Collection AI Vault
+After=network-online.target ollama.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=__USER__
+WorkingDirectory=__ROOT__/apps/server
+ExecStart=/usr/bin/env node --env-file=__ROOT__/.env --import tsx src/main.ts
+Environment=NODE_ENV=production
+Restart=always
+RestartSec=5
+
+# 加固：只允许写数据目录，禁止提权
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=__ROOT__/data
+# 服务进程退出后不保留 core dump，避免内存中的密钥落盘
+LimitCORE=0
+
+[Install]
+WantedBy=multi-user.target

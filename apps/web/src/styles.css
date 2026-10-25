@@ -1,0 +1,128 @@
+:root {
+  --cat-ink: #1f1a14;
+  --cat-ink-2: #3a3127;
+  --cat-gold: #a8863f;
+  --cat-gold-soft: #c9a96a;
+  --cat-paper: #f6f2ea;
+  --cat-card: #fffdf8;
+  --cat-line: #e6dfd2;
+  --cat-muted: #8a8074;
+  --cat-danger: #b2442f;
+  --cat-serif: 'Songti SC', 'STSong', 'Noto Serif SC', 'Source Han Serif SC', 'SimSun', serif;
+  --cat-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Segoe UI', sans-serif;
+
+  /* Element Plus 主题色 */
+  --el-color-primary: #8a6d34;
+  --el-color-primary-light-3: #ad9466;
+  --el-color-primary-light-5: #c4b08e;
+  --el-color-primary-light-7: #dccdb5;
+  --el-color-primary-light-8: #e8dccb;
+  --el-color-primary-light-9: #f3ede2;
+  --el-color-primary-dark-2: #6e572a;
+  --el-border-radius-base: 6px;
+  --el-font-family: var(--cat-sans);
+  --el-bg-color: var(--cat-card);
+  --el-border-color-light: var(--cat-line);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--cat-paper);
+  color: var(--cat-ink);
+  font-family: var(--cat-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.serif {
+  font-family: var(--cat-serif);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+a {
+  color: inherit;
+}
+
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.page-head h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.panel {
+  background: var(--cat-card);
+  border: 1px solid var(--cat-line);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.panel + .panel {
+  margin-top: 16px;
+}
+
+.panel h2 {
+  margin: 0 0 14px;
+  font-size: 17px;
+}
+
+.muted {
+  color: var(--cat-muted);
+  font-size: 13px;
+}
+
+.disclaimer {
+  font-size: 12px;
+  color: var(--cat-muted);
+  text-align: center;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+}
+
+.grid-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  column-gap: 20px;
+}
+
+.grid-form .full {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 16px 12px 24px;
+  }
+  .page-head h1 {
+    font-size: 20px;
+  }
+  .panel {
+    padding: 14px;
+  }
+  .el-dialog {
+    width: 94vw !important;
+  }
+  .hide-mobile {
+    display: none !important;
+  }
+}
